@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// 
-//
+// Company: 
+// Engineer: ABDUR REHMAN and ABDUL SAMAD
 // 
 // Create Date: 09/07/2026 11:17:37 AM
 // Design Name: FIR Filter
@@ -21,10 +21,10 @@
 
 
 module tap_pair #(parameter width = 16, parameter taps = 73)(
-input logic [$clog2(taps)-1:0]sel, 
-input logic [width-1:0] tap [0:taps-1],
-output logic [width-1:0] mux_high, 
-output logic [width-1:0] mux_low   
+input logic [$clog2(taps)-2:0]sel, 
+input logic signed [width-1:0] tap [0:taps-1],
+output logic signed[width-1:0] mux_high, 
+output logic signed[width-1:0] mux_low   
 );
 
 always @(*) begin
@@ -67,6 +67,7 @@ always @(*) begin
     34: begin mux_low = tap[34]; mux_high = tap[38]; end
     35: begin mux_low = tap[35]; mux_high = tap[37]; end
     36: begin mux_low = tap[36]; mux_high = '0; end
+    default: begin mux_low = '0; mux_high = '0; end
 
     endcase 
     
